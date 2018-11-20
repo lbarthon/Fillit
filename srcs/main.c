@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 11:29:58 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/20 11:52:13 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/20 14:06:07 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int		main(int ac, char **av)
 {
 	if (ac == 2)
-	{
-		if (!(ft_load_maps(av[1])))
-			ft_putendl("PAS VALIDE");
-	}
+		ft_print_short_bytes(ft_load_maps(av[1]));
 	else
 		ft_putendl("error");
 }
