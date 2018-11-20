@@ -6,7 +6,7 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/20 09:22:43 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/20 09:23:47 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,10 +35,12 @@ $(GENNAME): $(GENOBJ)
 	$(CC) $(CFLAGS) -o $(GENNAME) $(GENOBJ) $(LIB)
 
 fclean: clean
+	@make fclean -C libft
 	@rm -f $(NAME)
 	@rm -f $(GENNAME)
 
 clean:
+	@make clean -C libft
 	@rm -f $(OBJ)
 	@rm -f $(GENOBJ)
 
