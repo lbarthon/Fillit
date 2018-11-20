@@ -6,7 +6,7 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 14:51:15 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/19 16:45:34 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/20 13:46:27 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,16 +31,19 @@ FILES=ft_atoi.c ft_lstdel.c ft_memcpy.c ft_putnbr_fd.c ft_strdup.c \
 OBJ=$(FILES:.c=.o)
 
 NUMBERS= $(words $(FILES))
-ACTUAL = 0
+ACTUAL = 1
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@ar -rc libft.a $(OBJ)
-	@ranlib $(NAME)
+	@ar -rcs libft.a $(OBJ)
+	@printf "\r                                                              \r"
+	@printf "[Libft] Complete\n"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $<
+	@printf "\r                                                              \r"
+	@/bin/echo -n "[Libft] $(ACTUAL) / $(NUMBERS) -- Compiling $<"
 	@$(eval ACTUAL=$(shell echo $$(($(ACTUAL) + 1))))
 
 re: fclean all

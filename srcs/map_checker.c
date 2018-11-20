@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 10:25:58 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/20 11:38:56 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/20 13:18:11 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static short	*ft_map_init(void)
 	return (new);
 }
 
-static short	*ft_read_next_map(int fd, int i, short *maps)
+static int		ft_read_next_map(int fd, int i, short **maps)
 {
 	char	buff[21];
 	int		n;
@@ -48,42 +48,39 @@ static short	*ft_read_next_map(int fd, int i, short *maps)
 	if (i != 0)
 		read(fd, buff, 1);
 	if ((n = 0) == 0 && read(fd, buff, 20) != 20)
-		return (NULL);
+		return (0);
 	buff[20] = '\0';
-	if (i == 0 && !(maps = ft_map_init()))
-		return (NULL);
-	else if (!(maps = ft_map_realloc(maps, i)))
-		return (NULL);
+	if (i == 0 && !(*maps = ft_map_init()))
+		return (-1);
+	else if (!(*maps = ft_map_realloc(*maps, i)))
+		return (-1);
 	bit = 0;
 	while (n < 20)
 	{
 		if (buff[n] == '#')
-			maps[i] |= 1 << bit++;
+			(*maps)[i] |= 1 << bit++;
 		else
-			maps[i] |= 0 << bit++;
+			(*maps)[i] &= 0 << bit++;
 		if ((n + 1) % 5 == 0)
 			n++;
 		n++;
 	}
-	return (maps);
+	return (1);
 }
 
 short			*ft_load_maps(char *str)
 {
 	short	*maps;
+	char	buff[5];
 	int		fd;
 	int		i;
 
 	if ((fd = open(str, O_RDONLY)) == -1)
 		return (NULL);
 	i = 0;
-	while (i < 26)
-	{
-		maps = ft_read_next_map(fd, i++, maps);
-		if (maps == NULL)
-			return (NULL);
-	}
-	if (i == 26 && read(fd, NULL, 5) > 0)
+	while (i < 26 && ft_read_next_map(fd, i, &maps) > 0)
+		i++;
+	if (i == 26 && read(fd, buff, 5) > 0)
 		return (NULL);
 	return (maps);
 }

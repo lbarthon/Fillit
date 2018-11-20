@@ -6,22 +6,22 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/20 09:23:47 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/20 13:45:32 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=@gcc
-CFLAGS=-Wall -Werror -Wextra
+CFLAGS=-fsanitize=address -g -Wall -Werror -Wextra
 
 LIB=./libft/libft.a
 
 NAME=fillit
-FILES=./srcs/main.c
-OBJ=$(FILES:.c=.o)
+SRCS=./srcs/main.c ./srcs/is_valid.c ./srcs/map_checker.c
+OBJ=$(SRCS:.c=.o)
 
 GENNAME=generator
-GENFILES=./gen/main.c
-GENOBJ=$(GENFILES:.c=.o)
+GENSRCS=./gen/main.c
+GENOBJ=$(GENSRCS:.c=.o)
 
 all: lib $(NAME) $(GENNAME)
 
