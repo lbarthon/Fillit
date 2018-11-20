@@ -6,7 +6,7 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/20 15:12:10 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/20 15:16:45 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ LIB=./libft/libft.a
 
 NAME=fillit
 SRCS=./srcs/main.c ./srcs/is_valid.c ./srcs/map_loader.c \
-	 ./srcs/print_short_bytes.c
+	 ./srcs/print_short_bytes.c ./srcs/utils.c
 OBJ=$(SRCS:.c=.o)
 
 GENNAME=generator
