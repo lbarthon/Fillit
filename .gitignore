@@ -1,0 +1,4 @@
+*.o
+fillit
+generator
+libft/libft.a
