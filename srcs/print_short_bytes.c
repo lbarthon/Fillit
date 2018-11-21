@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:52:30 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/20 15:16:02 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/21 08:19:11 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ft_print_short_bytes(short *list)
 	int bit;
 	int len;
 
-	len = ft_list_len(list);
+	len = ft_short_list_len(list);
 	i = 0;
 	while (i < len)
 	{

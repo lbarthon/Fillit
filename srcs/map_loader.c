@@ -6,12 +6,11 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 10:25:58 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/20 15:56:41 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/21 09:23:52 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-
 
 static short	*ft_map_init(void)
 {
@@ -51,10 +50,10 @@ static int		ft_read_next_map(int fd, int i, short **maps)
 	int		n;
 	int		bit;
 
-	if (i != 0)
-		read(fd, buff, 1);
+	if (i != 0 && read(fd, buff, 1) > 0)
+		bit = -1;
 	if ((n = 0) == 0 && read(fd, buff, 20) != 20)
-		return (0);
+		return ((bit == -1) ? bit : 0);
 	buff[20] = '\0';
 	if (!(*maps = ft_map_realloc(*maps, i)))
 		return (-1);
@@ -64,10 +63,8 @@ static int		ft_read_next_map(int fd, int i, short **maps)
 		if (buff[n] == '#')
 			(*maps)[i] |= 1 << bit++;
 		else if (buff[n] == '.')
-			(*maps)[i] &= ~(0 << bit++);
-		else if ((n + 1) % 5 == 0 && buff[n] == '\n')
-			n++;
-		else
+			bit++;
+		else if ((buff[n] == '\n' && (n + 1) % 5 != 0) || buff[n] != '\n')
 			return (-1);
 		n++;
 	}
@@ -80,13 +77,19 @@ short			*ft_load_maps(char *str)
 	char	buff[5];
 	int		fd;
 	int		i;
+	int		r;
 
 	if ((fd = open(str, O_RDONLY)) == -1)
 		return (NULL);
 	i = 0;
-	while (i < 26 && ft_read_next_map(fd, i, &maps) > 0)
+	while (i < 26 && (r = ft_read_next_map(fd, i, &maps)) > 0)
 		i++;
-	if (i == 26 && read(fd, buff, 5) > 0)
+	if ((i == 26 && read(fd, buff, 5) > 0) || r == -1)
+	{
+		close(fd);
+		free(maps);
 		return (NULL);
+	}
+	close(fd);
 	return (maps);
 }

@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 11:19:59 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/20 16:10:55 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/21 09:06:42 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	ft_bounded(short nbr)
 	while (bit < 16)
 	{
 		i = 0;
-		if ((nbr & 1 << bit++) != 0)
+		if ((nbr & 1 << bit) != 0)
 		{
 			if (bit > 3 && (nbr & 1 << (bit - 4)) != 0)
 				i++;
