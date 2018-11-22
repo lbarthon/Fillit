@@ -6,18 +6,20 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/21 09:55:27 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/22 07:39:10 by ple-thiec        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=@gcc
-CFLAGS=-fsanitize=address -g -Wall -Werror -Wextra
-
-LIB=./libft/libft.a
+CFLAGS=-fsanitize=address -g -Wall -Werror -Wextra -I libft
 
 NAME=fillit
-SRCS=./srcs/main.c ./srcs/is_valid.c ./srcs/map_loader.c \
-	 ./srcs/print_short_bytes.c ./srcs/utils.c ./srcs/put_up.c
+SRCS=./srcs/main.c \
+	./srcs/is_valid.c \
+	./srcs/shapes_loader.c \
+	./srcs/print_short_bytes.c \
+	./srcs/utils.c \
+	./srcs/put_up.c
 OBJ=$(SRCS:.c=.o)
 
 GENNAME=generator
@@ -30,10 +32,10 @@ lib:
 	@make -C libft
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
+	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -L libft/ -lft
 
 $(GENNAME): $(GENOBJ)
-	$(CC) $(CFLAGS) -o $(GENNAME) $(GENOBJ) $(LIB)
+	$(CC) -o $(GENNAME) $(GENOBJ) $(CFLAGS) -L libft/ -lft
 
 fclean: clean
 	@make fclean -C libft
