@@ -6,7 +6,7 @@
 /*   By: ple-thie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:54:43 by ple-thie          #+#    #+#             */
-/*   Updated: 2018/11/21 13:02:06 by ple-thiec        ###   ########.fr       */
+/*   Updated: 2018/11/21 15:04:31 by ple-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_overlap_shapes(short shape1, short shape2)
 {
-	return shape1 ^ shape2 == 0;
+	return (shape1 ^ shape2) ^ shape1 == shape1;
 }
 
 static short ft_extract_shape(char *map, size_t map_size, int loc)
