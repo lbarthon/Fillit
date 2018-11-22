@@ -6,7 +6,7 @@
 /*   By: ple-thie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:54:43 by ple-thie          #+#    #+#             */
-/*   Updated: 2018/11/21 13:02:06 by ple-thiec        ###   ########.fr       */
+/*   Updated: 2018/11/22 07:43:23 by ple-thiec        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static short ft_extract_shape(char *map, size_t map_size, int loc)
 	int				n;
 	char			c;
 
-	len = loc + 4 > map_size ? map_size - loc : 4;
-	n= 0;
+	len = (loc + 4 > map_size) ? (map_size - loc) : 4;
+	n = 0;
 	extract = 0;
-	while (n != 4)
+	while (n < 4)
 	{
 		*map = *map << loc;
 		c = *map;
@@ -38,7 +38,12 @@ static short ft_extract_shape(char *map, size_t map_size, int loc)
 	return extract;
 }
 
-char	**ft_solve(short *shapes, int map_size, void *map, char **return_map)
+void	ft_place_shape(short shape, char **map, char disp_map, int loc)
+{
+	
+}
+
+char	**ft_solve(t_settings *settings)
 {
 	
 }
