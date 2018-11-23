@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 10:25:58 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/21 21:23:20 by ple-thiec        ###   ########.fr       */
+/*   Updated: 2018/11/22 16:21:44 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int		ft_read_next_shape(int fd, int i, short **shapes)
 {
 	char	buff[21];
 	int		bit;
-	int 	n;
+	int		n;
 
 	if (i != 0 && read(fd, buff, 1) > 0)
 		bit = -1;

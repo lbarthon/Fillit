@@ -2,3 +2,6 @@
 fillit
 generator
 libft/libft.a
+.idea/*
+CMakeLists.txt
+cmake-build-debug/*
