@@ -6,12 +6,12 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/23 10:47:46 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/23 13:25:41 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=@gcc
-CFLAGS=-Wall -Werror -Wextra -I libft
+CFLAGS=-Wall -Werror -Wextra
 
 NAME=fillit
 SRCS=./srcs/main.c \
@@ -38,6 +38,9 @@ $(NAME): $(OBJ)
 $(GENNAME): $(GENOBJ)
 	$(CC) -o $(GENNAME) $(GENOBJ) $(CFLAGS) -L libft/ -lft
 
+%.o: %.c
+	$(CC) $(CFLAGS) -I libft -c $< -o $@
+
 fclean: clean
 	@make fclean -C libft
 	@rm -f $(NAME)
@@ -50,4 +53,4 @@ clean:
 
 re: fclean all
 
-.PHONY: all fclean clean re
+.PHONY: all fclean clean re lib
