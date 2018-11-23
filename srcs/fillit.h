@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 11:18:31 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/22 16:20:18 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/23 11:36:00 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		ft_short_list_len(short *list);
 int		ft_is_valid(short *list);
 void	ft_put_up(short **shapes);
 int		ft_shapes_len(short *shapes);
-char 	*ft_create_str(int size);
+char	*ft_create_str(int size);
 int		ft_solve(char *tab, short *shapes, int nbr, int i);
 void	ft_print_tab(char **tab);
 

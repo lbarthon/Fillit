@@ -6,7 +6,7 @@
 /*   By: ple-thie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:54:43 by ple-thie          #+#    #+#             */
-/*   Updated: 2018/11/22 16:22:22 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/23 11:49:54 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int		ft_can_put(char *str, short shape, int str_len)
 	bit = 0;
 	while (bit < 16)
 	{
-		if (str[x] == '\0')
-			return (0);
-		if (shape & (1 << bit++) && str[x] != '.')
+		if (!str[x])
+			while (bit < 16)
+				if ((shape & 1 << bit++) != 0)
+					return (0);
+		if ((shape & 1 << bit++) != 0 && str[x] != '.')
 			return (-1);
 		x++;
 		if (bit % 4 == 0)
@@ -32,7 +34,7 @@ int		ft_can_put(char *str, short shape, int str_len)
 	return (1);
 }
 
-int		ft_put_shape(char *str, short shape, int str_len, char c)
+void	ft_put_shape(char *str, short shape, int str_len, char c)
 {
 	int x;
 	int bit;
@@ -41,7 +43,7 @@ int		ft_put_shape(char *str, short shape, int str_len, char c)
 	bit = 0;
 	while (bit < 16)
 	{
-		if (shape & (1 << bit++))
+		if ((shape & 1 << bit++) != 0)
 			str[x] = c;
 		x++;
 		if (bit % 4 == 0)
@@ -51,20 +53,22 @@ int		ft_put_shape(char *str, short shape, int str_len, char c)
 
 int		ft_solve(char *str, short *shapes, int shapes_len, int i)
 {
-	int     put;
-	int 	str_len;
-    char    *tmp;
+	int		put;
+	int		str_len;
+	char	*tmp;
 
+	if (!str)
+		return (0);
 	tmp = str;
 	str_len = ft_strclen(tmp, '\n');
 	if (i >= shapes_len)
 		return (1);
-	while ((put = ft_can_put(tmp, shapes[i], str_len)))
+	while ((put = ft_can_put(tmp, shapes[i], str_len)) != 0)
 	{
 		if (put == 1)
 		{
 			ft_put_shape(tmp, shapes[i], str_len, 'A' + i);
-			if (ft_solve(tmp, shapes, shapes_len, i + 1) == 1)
+			if (ft_solve(str, shapes, shapes_len, i + 1))
 				return (1);
 			ft_put_shape(tmp, shapes[i], str_len, '.');
 		}
@@ -73,10 +77,10 @@ int		ft_solve(char *str, short *shapes, int shapes_len, int i)
 	return (0);
 }
 
-char 	*ft_create_str(int size)
+char	*ft_create_str(int size)
 {
-	char *str;
-	int ind;
+	char	*str;
+	int		ind;
 
 	if (!(str = (char*)malloc(size * size + size + 1)))
 		return (NULL);
@@ -92,18 +96,3 @@ char 	*ft_create_str(int size)
 	str[ind] = '\0';
 	return (str);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
