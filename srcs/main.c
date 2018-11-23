@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 11:29:58 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/23 13:17:29 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/23 14:03:48 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ int		main(int ac, char **av)
 			ft_putendl("error");
 	}
 	else
-		ft_putendl("error");
+		ft_putendl("usage: ./fillit file");
 	if (shapes)
 		free(shapes);
-	while (1) {}
 	return (0);
 }

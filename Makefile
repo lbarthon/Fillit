@@ -6,7 +6,7 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/23 13:25:41 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/23 13:40:27 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,12 +27,12 @@ GENNAME=generator
 GENSRCS=./gen/main.c
 GENOBJ=$(GENSRCS:.c=.o)
 
-all: lib $(NAME) $(GENNAME)
+all: $(NAME)
 
 lib:
 	@make -C libft
 
-$(NAME): $(OBJ)
+$(NAME): lib $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -L libft/ -lft
 
 $(GENNAME): $(GENOBJ)
