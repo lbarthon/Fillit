@@ -12,102 +12,98 @@
 
 #include "fillit.h"
 
-int		ft_overlap(char **tab, short shape, int x, int y)
-{
-	int x_incr;
-	int y_incr;
-
-	x_incr = 0;
-	y_incr = 0;
-	while (tab[x + x_incr] && x_incr < 4)
-	{
-		while (tab[x + x_incr][y + y_incr] && y_incr < 4)
-		{
-			if (tab[x + x_incr][y + y_incr] != '.' &&
-					(shape & 1 << (x_incr * 4 + y_incr)) == 1)
-				return (1);
-			y_incr++;
-		}
-		x_incr++;
-	}
-	if (!y_incr == 4 && !x_incr == 4)
-	{
-		y_incr += x_incr * 4;
-		while (y_incr < 16)
-			if (shape & 1 << (y_incr) == 1)
-				return (1);
-	}
-	return (0);
-}
-
-int		ft_can_put(char **tab, short shape)
+int		ft_can_put(char *str, short shape, int str_len)
 {
 	int x;
-	int y;
-
-	x = 0;
-	while (tab[x])
-	{
-		y = 0;
-		while (tab[x][y])
-		{
-			if (ft_overlap(tab, shape, x, y))
-				return (0);
-			y++;
-		}
-		x++;
-	}
-	return (1);
-}
-
-int		ft_put_shape(char **tab, short shape, char c)
-{
-	int x;
-	int y;
 	int bit;
 
 	x = 0;
 	bit = 0;
-	while (tab[x])
+	while (bit < 16)
 	{
-		y = 0;
-		while (tab[x][y])
-		{
-			if (shape & 1 << bit++)
-				tab[x][y] = c;
-			y++;
-		}
-		x++;
-	}
-}
-
-int		ft_next_put(char **tab, short *shapes, int i)
-{
-	int j;
-
-	j = i + 1;
-	while (!ft_can_put(tab, shapes[j]) && j != i)
-		j = (j + 1) % 26;
-	if (j == i)
-		return (-1);
-	return (j);
-}
-
-int		ft_solve(char **tab, char *used, short *shapes, int i)
-{
-	int shapes_len;
-	int j;
-
-	shapes_len = ft_shapes_len(shapes);
-	if (ft_strlen_nofault(used) == shapes_len)
-		return (1);
-	if (used[shapes_len] != 0 || !ft_can_put(tab, shapes[i]))
-	{
-		if ((j = ft_next_put(tab, shapes, i)) != -1)
-			return (ft_solve(tab, used, shapes, j));
-		else
+		if (str[x] == '\0')
 			return (0);
+		if (shape & (1 << bit++) && str[x] != '.')
+			return (-1);
+		x++;
+		if (bit % 4 == 0)
+			x += str_len - 3;
 	}
-	ft_put_shape(tab, shapes[i], 'A' + i);
-	return (ft_solve(tab, used, shapes, (i + 1) % 26));
+	return (1);
 }
+
+int		ft_put_shape(char *str, short shape, int str_len, char c)
+{
+	int x;
+	int bit;
+
+	x = 0;
+	bit = 0;
+	while (bit < 16)
+	{
+		if (shape & (1 << bit++))
+			str[x] = c;
+		x++;
+		if (bit % 4 == 0)
+			x += str_len - 3;
+	}
+}
+
+int		ft_solve(char *str, short *shapes, int shapes_len, int i)
+{
+	int     put;
+	int 	str_len;
+    char    *tmp;
+
+	tmp = str;
+	str_len = ft_strclen(tmp, '\n');
+	if (i >= shapes_len)
+		return (1);
+	while ((put = ft_can_put(tmp, shapes[i], str_len)))
+	{
+		if (put == 1)
+		{
+			ft_put_shape(tmp, shapes[i], str_len, 'A' + i);
+			if (ft_solve(tmp, shapes, shapes_len, i + 1) == 1)
+				return (1);
+			ft_put_shape(tmp, shapes[i], str_len, '.');
+		}
+		tmp++;
+	}
+	return (0);
+}
+
+char 	*ft_create_str(int size)
+{
+	char *str;
+	int ind;
+
+	if (!(str = (char*)malloc(size * size + size + 1)))
+		return (NULL);
+	ind = 0;
+	while (ind < size * size + size)
+	{
+		if (ind != 0 && (ind + 1) % (size + 1) == 0)
+			str[ind] = '\n';
+		else
+			str[ind] = '.';
+		ind++;
+	}
+	str[ind] = '\0';
+	return (str);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

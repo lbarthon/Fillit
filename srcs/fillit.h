@@ -25,7 +25,8 @@ int		ft_short_list_len(short *list);
 int		ft_is_valid(short *list);
 void	ft_put_up(short **shapes);
 int		ft_shapes_len(short *shapes);
-int		ft_solve(char **tab, char *used, short *shapes, int i);
+char 	*ft_create_str(int size);
+int		ft_solve(char *tab, short *shapes, int nbr, int i);
 void	ft_print_tab(char **tab);
 
 #endif
