@@ -6,40 +6,48 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/19 11:29:58 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/22 07:21:17 by ple-thiec        ###   ########.fr       */
+/*   Updated: 2018/11/23 11:48:42 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static void	ft_free_settings(t_settings *settings)
+int		ft_get_min_size(int shapes)
 {
-	if (settings != NULL)
-	{
-		free(settings->shapes);
-		free(settings);
-	}
+	int len;
+	int i;
+
+	len = shapes * 4;
+	i = 2;
+	while (i * i < len)
+		i++;
+	return (i);
 }
 
-int			main(int ac, char **av)
+int		main(int ac, char **av)
 {
-	t_settings *settings;
+	short	*shapes;
+	char	*grid;
+	int		i;
 
+	shapes = NULL;
 	if (ac == 2)
 	{
-		if (!(settings = malloc(sizeof(t_settings))))
-			return (1);
-
-		settings->shapes = ft_load_shapes(av[1]);
-		if (settings->shapes && ft_is_valid(settings->shapes))
+		shapes = ft_load_shapes(av[1]);
+		if (ft_is_valid(shapes))
 		{
-			ft_put_up(&settings->shapes);
-			ft_print_short_bytes(settings->shapes);
+			i = ft_get_min_size(ft_shapes_len(shapes));
+			ft_put_up(&shapes);
+			grid = ft_create_str(i++);
+			while (!ft_solve(grid, shapes, ft_shapes_len(shapes), 0))
+				grid = ft_create_str(i++);
+			ft_putstr(grid);
 		}
 		else
 			ft_putendl("error");
 	}
 	else
 		ft_putendl("error");
-	ft_free_settings(settings);
+	if (shapes)
+		free(shapes);
 }

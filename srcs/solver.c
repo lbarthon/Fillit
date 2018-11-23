@@ -6,44 +6,93 @@
 /*   By: ple-thie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:54:43 by ple-thie          #+#    #+#             */
-/*   Updated: 2018/11/22 09:03:53 by ple-thie         ###   ########.fr       */
+/*   Updated: 2018/11/23 11:49:54 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 
-static int	ft_overlap_shapes(short shape1, short shape2)
+int		ft_can_put(char *str, short shape, int str_len)
 {
-	return (shape1 ^ shape2) ^ shape1 == shape1;
-}
+	int x;
+	int bit;
 
-static short ft_extract_shape(char *map, size_t map_size, int loc)
-{
-	short			extract;
-	unsigned int	len;	
-	int				n;
-	char			c;
-
-	len = (loc + 4 > map_size) ? (map_size - loc) : 4;
-	n = 0;
-	extract = 0;
-	while (n < 4)
+	x = 0;
+	bit = 0;
+	while (bit < 16)
 	{
-		*map = *map << loc;
-		c = *map;
-		extract = c & 0xF0;
-		extract << len;
-		n++;
+		if (!str[x])
+			while (bit < 16)
+				if ((shape & 1 << bit++) != 0)
+					return (0);
+		if ((shape & 1 << bit++) != 0 && str[x] != '.')
+			return (-1);
+		x++;
+		if (bit % 4 == 0)
+			x += str_len - 3;
 	}
-	return extract;
+	return (1);
 }
 
-void	ft_place_shape(short shape, char **map, char disp_map, int loc)
+void	ft_put_shape(char *str, short shape, int str_len, char c)
 {
-	
+	int x;
+	int bit;
+
+	x = 0;
+	bit = 0;
+	while (bit < 16)
+	{
+		if ((shape & 1 << bit++) != 0)
+			str[x] = c;
+		x++;
+		if (bit % 4 == 0)
+			x += str_len - 3;
+	}
 }
 
-char	**ft_solve(t_settings *settings)
+int		ft_solve(char *str, short *shapes, int shapes_len, int i)
 {
-	
+	int		put;
+	int		str_len;
+	char	*tmp;
+
+	if (!str)
+		return (0);
+	tmp = str;
+	str_len = ft_strclen(tmp, '\n');
+	if (i >= shapes_len)
+		return (1);
+	while ((put = ft_can_put(tmp, shapes[i], str_len)) != 0)
+	{
+		if (put == 1)
+		{
+			ft_put_shape(tmp, shapes[i], str_len, 'A' + i);
+			if (ft_solve(str, shapes, shapes_len, i + 1))
+				return (1);
+			ft_put_shape(tmp, shapes[i], str_len, '.');
+		}
+		tmp++;
+	}
+	return (0);
+}
+
+char	*ft_create_str(int size)
+{
+	char	*str;
+	int		ind;
+
+	if (!(str = (char*)malloc(size * size + size + 1)))
+		return (NULL);
+	ind = 0;
+	while (ind < size * size + size)
+	{
+		if (ind != 0 && (ind + 1) % (size + 1) == 0)
+			str[ind] = '\n';
+		else
+			str[ind] = '.';
+		ind++;
+	}
+	str[ind] = '\0';
+	return (str);
 }

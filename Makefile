@@ -6,12 +6,12 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/22 07:39:10 by ple-thiec        ###   ########.fr        #
+#    Updated: 2018/11/23 10:47:46 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC=@gcc
-CFLAGS=-fsanitize=address -g -Wall -Werror -Wextra -I libft
+CFLAGS=-Wall -Werror -Wextra -I libft
 
 NAME=fillit
 SRCS=./srcs/main.c \
@@ -19,7 +19,8 @@ SRCS=./srcs/main.c \
 	./srcs/shapes_loader.c \
 	./srcs/print_short_bytes.c \
 	./srcs/utils.c \
-	./srcs/put_up.c
+	./srcs/put_up.c \
+	./srcs/solver.c
 OBJ=$(SRCS:.c=.o)
 
 GENNAME=generator
