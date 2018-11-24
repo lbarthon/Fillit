@@ -6,13 +6,11 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 09:08:23 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/20 13:28:12 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/24 11:23:40 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include <stdio.h>
 
 void	*ft_realloc(void *ptr, int size, int newsize)
 {

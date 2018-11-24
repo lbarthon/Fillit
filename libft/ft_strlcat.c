@@ -6,12 +6,11 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 10:28:12 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/10 15:36:25 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/24 11:23:50 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
-#include <stdio.h>
 
 static size_t	ft_strlen(const char *str)
 {

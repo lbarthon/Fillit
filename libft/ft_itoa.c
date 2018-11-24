@@ -6,13 +6,12 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 13:48:32 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/09 08:52:56 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/24 11:24:01 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 static int	ft_size(int n)
 {
