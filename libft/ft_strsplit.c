@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 13:06:55 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/09 11:49:48 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/24 16:06:08 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char		**ft_strsplit(char const *str, char c)
 		j = 0;
 		if (!(tab[i] = (char*)malloc(sizeof(char) * ft_wlength(str, c, ind))))
 			return (NULL);
-		while (str[ind] != c)
+		while (str[ind] && str[ind] != c)
 			tab[i][j++] = str[ind++];
 		tab[i][j] = '\0';
 		i++;
