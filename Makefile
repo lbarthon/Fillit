@@ -6,7 +6,7 @@
 #    By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/19 09:31:21 by lbarthon          #+#    #+#              #
-#    Updated: 2018/11/23 13:40:27 by lbarthon         ###   ########.fr        #
+#    Updated: 2018/11/24 10:12:28 by lbarthon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ GENOBJ=$(GENSRCS:.c=.o)
 
 all: $(NAME)
 
-lib:
+./libft/libft.a:
 	@make -C libft
 
-$(NAME): lib $(OBJ)
+$(NAME): ./libft/libft.a $(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(CFLAGS) -L libft/ -lft
 
 $(GENNAME): $(GENOBJ)
