@@ -6,7 +6,7 @@
 /*   By: lbarthon <lbarthon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 10:25:58 by lbarthon          #+#    #+#             */
-/*   Updated: 2018/11/22 16:21:44 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/24 14:08:58 by ple-thie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ short			*ft_load_shapes(char *str)
 	int		i;
 	int		r;
 
+	shapes = NULL;
 	if ((fd = open(str, O_RDONLY)) == -1)
 		return (NULL);
 	i = 0;
