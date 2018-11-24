@@ -6,7 +6,7 @@
 /*   By: ple-thie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 13:54:43 by ple-thie          #+#    #+#             */
-/*   Updated: 2018/11/23 11:49:54 by lbarthon         ###   ########.fr       */
+/*   Updated: 2018/11/24 10:54:11 by lbarthon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@ int		ft_can_put(char *str, short shape, int str_len)
 {
 	int x;
 	int bit;
+	int len;
 
 	x = 0;
 	bit = 0;
+	len = ft_strlen_nofault(str);
 	while (bit < 16)
 	{
-		if (!str[x])
+		if (x >= len)
+		{
 			while (bit < 16)
 				if ((shape & 1 << bit++) != 0)
 					return (0);
+			break ;
+		}
 		if ((shape & 1 << bit++) != 0 && str[x] != '.')
 			return (-1);
 		x++;
@@ -77,11 +82,13 @@ int		ft_solve(char *str, short *shapes, int shapes_len, int i)
 	return (0);
 }
 
-char	*ft_create_str(int size)
+char	*ft_create_str(int size, char *grid)
 {
 	char	*str;
 	int		ind;
 
+	if (grid)
+		free(grid);
 	if (!(str = (char*)malloc(size * size + size + 1)))
 		return (NULL);
 	ind = 0;
